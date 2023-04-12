@@ -20,6 +20,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
     super.initState();
     controller = Modular.get();
     controller.random();
+    controller.questionsModel;
   }
 
   @override
@@ -40,7 +41,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListView.separated(
-                  itemCount: 5,
+                  itemCount: controller.questionsModel.questions.length,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   separatorBuilder: (context, index) {
@@ -49,7 +50,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                   itemBuilder: (context, index) {
                     return QuestionsTile(
                       questuionNumber: index,
-                      label: 'bcwiebijnijni jnkjn',
+                      label: controller.questionsModel.questions[index].questionText,
                       question:
                           'iebkejsndkjbekrbcekjwvbhfej wekjf cwkejhfdbsckeubdfcwkhje fdkhwefkjhwjkfhkwhefkg',
                     );

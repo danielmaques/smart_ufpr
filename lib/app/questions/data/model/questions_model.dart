@@ -1,47 +1,51 @@
 class QuestionsModel {
-  QuestionsModel({
-    required this.questions,
-  });
+  QuestionsModel({this.questions = const []});
 
   final List<Question> questions;
 
-  factory QuestionsModel.fromMap(Map<String, dynamic> json) => QuestionsModel(
-        questions: List<Question>.from(json["questions"].map((x) => Question.fromMap(x))),
-      );
+  factory QuestionsModel.fromJson(Map<String, dynamic> json) {
+    final questionsList = json['questions'] as List<dynamic>;
+    final questions =
+        questionsList.map((questionJson) => Question.fromJson(questionJson)).toList();
+    return QuestionsModel(questions: questions);
+  }
 
-  Map<String, dynamic> toMap() => {
-        "questions": List<dynamic>.from(questions.map((x) => x.toMap())),
-      };
+  Map<String, dynamic> toJson() =>
+      {'questions': questions.map((q) => q.toJson()).toList()};
 }
 
 class Question {
   Question({
-    required this.a,
-    required this.b,
-    required this.c,
-    required this.d,
-    required this.question,
+    this.optionA = '',
+    this.optionB = '',
+    this.optionC = '',
+    this.optionD = '',
+    this.questionText = '',
   });
 
-  final String a;
-  final String b;
-  final String c;
-  final String d;
-  final String question;
+  final String optionA;
+  final String optionB;
+  final String optionC;
+  final String optionD;
+  final String questionText;
 
-  factory Question.fromMap(Map<String, dynamic> json) => Question(
-        a: json["a"],
-        b: json["b"],
-        c: json["c"],
-        d: json["d"],
-        question: json["question"],
-      );
+  factory Question.fromJson(Map<String, dynamic> json) {
+    return Question(
+      optionA: json['optionA'] ?? '',
+      optionB: json['optionB'] ?? '',
+      optionC: json['optionC'] ?? '',
+      optionD: json['optionD'] ?? '',
+      questionText: json['questionText'] ?? '',
+    );
+  }
 
-  Map<String, dynamic> toMap() => {
-        "a": a,
-        "b": b,
-        "c": c,
-        "d": d,
-        "question": question,
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'optionA': optionA,
+      'optionB': optionB,
+      'optionC': optionC,
+      'optionD': optionD,
+      'questionText': questionText,
+    };
+  }
 }

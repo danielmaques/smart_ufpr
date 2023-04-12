@@ -6,8 +6,6 @@ import 'package:quiz_ufpr/app/questions/page/controller/questions_controller.dar
 
 import 'app/app.dart';
 import 'app/questions/data/datasource/questions_datasorce.dart';
-import 'app/questions/data/repository/questios_repository_impl.dart';
-import 'app/questions/domain/repository/questios_repository.dart';
 
 void main() {
   return runApp(ModularApp(module: AppModule(), child: const AppWidget()));
@@ -17,11 +15,10 @@ class AppModule extends Module {
   @override
   List<Bind> get binds => [
         Bind.lazySingleton<QuestionsDataSorce>((i) => QuestionsDataSorceImpl()),
-        Bind.lazySingleton<QuestionsRepository>(
-            (i) => QuestionsRepositoryImpl(datadource: i())),
         Bind.lazySingleton<QuestionsUseCase>(
-            (i) => QuestionsUseCaseImpl(repository: i())),
-        Bind.lazySingleton<IQuestionsController>((i) => QuestionsController(useCase: i())),
+            (i) => QuestionsUseCaseImpl(dataSource: i())),
+        Bind.lazySingleton<IQuestionsController>(
+            (i) => QuestionsController(useCase: i())),
       ];
 
   @override

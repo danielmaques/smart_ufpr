@@ -51,17 +51,23 @@ class _QuestionsTileState extends State<QuestionsTile> {
             ),
           ),
           const SizedBox(height: 20),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            separatorBuilder: (context, index) {
-              return const SizedBox(height: 10);
-            },
-            itemCount: 4,
-            itemBuilder: (context, index) {
-              return options(index: index);
-            },
+          Text(
+            widget.question,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
           ),
+          // ListView.separated(
+          //   shrinkWrap: true,
+          //   physics: const NeverScrollableScrollPhysics(),
+          //   separatorBuilder: (context, index) {
+          //     return const SizedBox(height: 10);
+          //   },
+          //   itemCount: 4,
+          //   itemBuilder: (context, index) {
+          //     return options(index: index);
+          //   },
+          // ),
         ],
       ),
     );

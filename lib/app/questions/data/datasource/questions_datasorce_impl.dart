@@ -7,9 +7,16 @@ import 'questions_datasorce.dart';
 
 class QuestionsDataSorceImpl implements QuestionsDataSorce {
   @override
-  Future<List<QuestionsModel>> call() async {
-    final jsonString = await rootBundle.loadString('assets/questions.json');
-    final jsonList = json.decode(jsonString);
-    return jsonList.map((json) => QuestionsModel.fromMap(json)).toList();
+  Future<QuestionsModel> getAllQuestions() async {
+    try {
+      final jsonString = await rootBundle.loadString('assets/questions.json');
+      final jsonMap = json.decode(jsonString);
+      if (jsonMap != null) {
+        return QuestionsModel.fromJson(jsonMap);
+      }
+      throw Exception('Error parsing questions json');
+    } catch (e) {
+      rethrow;
+    }
   }
 }

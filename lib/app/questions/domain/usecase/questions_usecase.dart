@@ -1,18 +1,19 @@
 import 'package:quiz_ufpr/app/questions/data/model/questions_model.dart';
-import 'package:quiz_ufpr/app/questions/domain/repository/questios_repository.dart';
+
+import '../../data/datasource/questions_datasorce.dart';
 
 abstract class QuestionsUseCase {
-  Future<List<QuestionsModel>> call();
+  Future<QuestionsModel> call();
 }
 
 class QuestionsUseCaseImpl extends QuestionsUseCase {
-  final QuestionsRepository repository;
+  final QuestionsDataSorce dataSource;
 
-  QuestionsUseCaseImpl({required this.repository});
+  QuestionsUseCaseImpl({required this.dataSource});
 
   @override
-  Future<List<QuestionsModel>> call() async {
-    final result = await repository.getQuestions();
+  Future<QuestionsModel> call() async {
+    final result = await dataSource.getAllQuestions();
     return result;
   }
 }
