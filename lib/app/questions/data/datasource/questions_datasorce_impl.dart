@@ -11,10 +11,7 @@ class QuestionsDataSorceImpl implements QuestionsDataSorce {
     try {
       final jsonString = await rootBundle.loadString('assets/questions.json');
       final jsonMap = json.decode(jsonString);
-      if (jsonMap != null) {
-        return QuestionsModel.fromJson(jsonMap);
-      }
-      throw Exception('Error parsing questions json');
+      return QuestionsModel.fromJson(jsonMap);
     } catch (e) {
       rethrow;
     }

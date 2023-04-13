@@ -18,7 +18,7 @@ class AppModule extends Module {
         Bind.lazySingleton<QuestionsUseCase>(
             (i) => QuestionsUseCaseImpl(dataSource: i())),
         Bind.lazySingleton<IQuestionsController>(
-            (i) => QuestionsController(useCase: i())),
+            (i) => QuestionsController(i())),
       ];
 
   @override
