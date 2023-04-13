@@ -6,12 +6,12 @@ class QuestionsTile extends StatefulWidget {
     super.key,
     required this.questuionNumber,
     required this.label,
-    required this.question,
+    required this.itemCount,
   });
 
   final int questuionNumber;
   final String label;
-  final String question;
+  final int itemCount;
 
   @override
   State<QuestionsTile> createState() => _QuestionsTileState();
@@ -80,10 +80,10 @@ class _QuestionsTileState extends State<QuestionsTile> {
             });
           },
         ),
-        Flexible(
+        const Flexible(
           child: Text(
-            widget.question,
-            style: const TextStyle(
+            'widget.question',
+            style: TextStyle(
               color: Colors.white,
             ),
           ),

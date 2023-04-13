@@ -3,11 +3,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/core.dart';
 import '../../app.dart';
-import 'controller/questions_controller.dart';
 
 class QuestionsPage extends StatefulWidget {
   const QuestionsPage({super.key});
@@ -17,13 +15,9 @@ class QuestionsPage extends StatefulWidget {
 }
 
 class _QuestionsPageState extends State<QuestionsPage> {
-  late IQuestionsController controller;
-
   @override
   void initState() {
     super.initState();
-    controller = Modular.get();
-    controller.random();
   }
 
   @override
@@ -49,7 +43,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ListView.separated(
-                        itemCount: 10,
+                        itemCount: item!.length,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         separatorBuilder: (context, index) {
@@ -58,8 +52,8 @@ class _QuestionsPageState extends State<QuestionsPage> {
                         itemBuilder: (context, index) {
                           return QuestionsTile(
                             questuionNumber: index,
-                            label: item['question'],
-                            question: '',
+                            label: item[index]['question'],
+                            itemCount: 4,
                           );
                         },
                       ),
@@ -96,6 +90,15 @@ class _QuestionsPageState extends State<QuestionsPage> {
       var temp = list[i];
       list[i] = list[j];
       list[j] = temp;
+
+      // Embaralhar as opções de resposta
+      var options = ['optionA', 'optionB', 'optionC', 'optionD'];
+      for (var option in options) {
+        var k = random.nextInt(4);
+        var optionTemp = list[i][option];
+        list[i][option] = list[j][options[k]];
+        list[j][options[k]] = optionTemp;
+      }
     }
     return list.sublist(length - n);
   }

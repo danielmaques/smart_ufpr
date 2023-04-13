@@ -21,6 +21,7 @@ class Question {
     this.optionC = '',
     this.optionD = '',
     this.questionText = '',
+    this.correta = '',
   });
 
   final String optionA;
@@ -28,6 +29,7 @@ class Question {
   final String optionC;
   final String optionD;
   final String questionText;
+  final String correta;
 
   factory Question.fromJson(Map<String, dynamic> json) {
     return Question(
@@ -36,6 +38,7 @@ class Question {
       optionC: json['optionC'] ?? '',
       optionD: json['optionD'] ?? '',
       questionText: json['questionText'] ?? '',
+      correta: json['correta'] ?? '',
     );
   }
 
@@ -46,6 +49,7 @@ class Question {
       'optionC': optionC,
       'optionD': optionD,
       'questionText': questionText,
+      'correta': correta,
     };
   }
 }
